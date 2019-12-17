@@ -1,0 +1,74 @@
+SELECT * FROM teacher;
+
+
+ teacher_id | first_name | last_name | old | salary | home_address
+------------+------------+-----------+-----+--------+-----+-----
+          1 | Peter      | Karr      |  34 |    400 | kharkiv, peremohy street
+          2 | Sarah      | Li        |  56 |    800 | kharkiv, sumska street, 15
+          3 | Richard    | Torn      |  23 |    250 | kharkiv, gimnaziyna naberezhna, 3
+
+school=# SELECT
+school-#        teacher_id,
+school-#        first_name,
+school-#        last_name
+school-# FROM
+school-#        teacher
+school-# WHERE
+school-#        teacher_id > 1;
+
+ teacher_id | first_name | last_name
+------------+------------+-----------
+          2 | Sarah      | Li
+          3 | Richard    | Torn
+
+school=# SELECT
+school-#        old,
+school-#        salary,
+school-#        home_address
+school-# FROM
+school-#        teacher
+school-# WHERE
+school-#        teacher_id < 3
+school-# ORDER BY
+school-#        salary DESC;
+
+ old | salary |        home_address
+-----+--------+----------------------------
+  56 |    800 | kharkiv, sumska street, 15
+  34 |    400 | kharkiv, peremohy street
+
+school=# SELECT * FROM teacher ORDER BY 1 LIMIT 2;
+
+ teacher_id | first_name | last_name | old | salary |        home_address
+------------+------------+-----------+-----+--------+----------------------------
+          1 | Peter      | Karr      |  34 |    400 | kharkiv, peremohy street
+          2 | Sarah      | Li        |  56 |    800 | kharkiv, sumska street, 15
+
+school=# SELECT * FROM teacher ORDER BY 1 LIMIT 2 OFFSET 2;
+
+ teacher_id | first_name | last_name | old | salary | home_address
+------------+------------+-----------+-----+--------+----------------
+          3 | Richard    | Torn      |  23 |    250 | kharkiv, gimnaziyna naberezhna, 3
+
+school=# SELECT
+school-#        last_name,
+school-#        salary
+school-# FROM
+school-#        teacher
+school-# ORDER BY
+school-#        salary
+school-# FETCH FIRST ROW ONLY;
+
+ last_name | salary
+-----------+--------
+ Torn      |    250
+
+school=# SELECT last_name, title
+school-# FROM teacher
+school-# LEFT JOIN lesson ON lesson.title = teacher.last_name;
+
+ last_name | title
+-----------+-------
+ Karr      |
+ Li        |
+ Torn      |
