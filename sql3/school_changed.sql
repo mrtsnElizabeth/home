@@ -81,3 +81,32 @@ school-# WHERE class.class_id IS NULL OR lesson.lesson_id IS NULL;
 ----------+--------+---------------+-----------+-------+--------+---------+-----+----------
         4 |      4 |            33 |           |       |        |         |     |
         5 |      2 |            25 |           |       |        |         |     |
+
+school=# SELECT lesson_id, title, cabinet
+school-# FROM lesson
+school-# ORDER BY cabinet DESC;
+
+ lesson_id |  title   | cabinet
+-----------+----------+---------
+         3 | Math     |      84
+         1 | Muzic    |      67
+         2 | Painting |      25
+
+school=# SELECT title, cabinet, day
+school-# FROM lesson
+school-# ORDER BY title ASC, cabinet DESC;
+
+  title   | cabinet |   day
+----------+---------+---------
+ Math     |      84 | friday
+ Muzic    |      67 | monday
+ Painting |      25 | tuesday
+
+school=# SELECT * FROM teacher
+school-# ORDER BY salary
+school-# LIMIT 1
+school-# OFFSET 2;
+
+ teacher_id | first_name | last_name | old | salary |        home_address
+------------+------------+-----------+-----+--------+----------------------------
+          2 | Sarah      | Li        |  56 |    800 | kharkiv, sumska street, 15
